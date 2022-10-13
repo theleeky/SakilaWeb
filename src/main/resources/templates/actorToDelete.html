@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Delete Actor</title>
+</head>
+<body>
+<h4>Actor you wish to delete: <br></h4>
+<div th:text="${actor.firstName}">This is the actor's first name</div>
+<div th:text="${actor.lastName}">This is the actor's last name</div>
+<form action="#" method="post" th:action="@{/sakila/actor/delete}" th:object="${actor}">
+  <input type="hidden" th:value="*{id}" name="id">
+  <button th:name="action" type="submit">Delete</button>
+</form>
+</body>
+</html>
+

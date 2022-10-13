@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,12 +21,10 @@ public class SakilaWebController {
     @Autowired
     private ActorRepository repo;
     private final ActorDAO actorDAO;
-    private ObjectMapper mapper;
-    private HttpHeaders headers;
 
-    public SakilaWebController(ActorDAO actorDAO, ObjectMapper mapper) {
+
+    public SakilaWebController(ActorDAO actorDAO) {
         this.actorDAO = actorDAO;
-        mapper = new ObjectMapper();
     }
 
 //    @GetMapping("/sakila/testname")
@@ -74,13 +73,17 @@ public class SakilaWebController {
     public String deleteActor(@PathVariable int id, Model model){
         ActorDTO actor = actorDAO.getActorById(id);
         model.addAttribute("actor", actor);
-        return "actorToDelete";
+        if (id > 200)
+            return "actorToDelete";
+        else
+            return "redirect:/sakila";
+
     }
 
-    @PostMapping("sakila/actor/delete/{id}")
-    public String actorDeleted(@ModelAttribute @PathVariable(name = "id") int id, Model model){
-        System.out.println(id);
-        int deletedActor = actorDAO.deleteActor(id);
+    @PostMapping("sakila/actor/delete")
+    public String actorDeleted(@ModelAttribute Actor actor, Model model){
+        System.out.println(actor.getId());
+        ActorDTO deletedActor = actorDAO.deleteActor(actor.getId());
         model.addAttribute("actor", deletedActor);
         return "actorDeleted";
     }

@@ -1,6 +1,7 @@
 package com.sparta.sakilaweb.dto;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Objects;
 
 /**
@@ -10,14 +11,16 @@ public class ActorDTO implements Serializable {
     private Integer id;
     private String firstName;
     private String lastName;
+    private Instant lastUpdate;
 
     public ActorDTO() {
     }
 
-    public ActorDTO(Integer id, String firstName, String lastName) {
+    public ActorDTO(Integer id, String firstName, String lastName, Instant lastUpdate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.lastUpdate = lastUpdate;
     }
 
     public Integer getId() {
@@ -44,6 +47,14 @@ public class ActorDTO implements Serializable {
         this.lastName = lastName;
     }
 
+    public Instant getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setLastUpdate(Instant lastUpdate) {
+        this.lastUpdate = lastUpdate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -51,12 +62,13 @@ public class ActorDTO implements Serializable {
         ActorDTO entity = (ActorDTO) o;
         return Objects.equals(this.id, entity.id) &&
                 Objects.equals(this.firstName, entity.firstName) &&
-                Objects.equals(this.lastName, entity.lastName);
+                Objects.equals(this.lastName, entity.lastName) &&
+                Objects.equals(this.lastUpdate, entity.lastUpdate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName);
+        return Objects.hash(id, firstName, lastName, lastUpdate);
     }
 
     @Override
@@ -64,6 +76,7 @@ public class ActorDTO implements Serializable {
         return getClass().getSimpleName() + "(" +
                 "id = " + id + ", " +
                 "firstName = " + firstName + ", " +
-                "lastName = " + lastName + ")";
+                "lastName = " + lastName + ", " +
+                "lastUpdate = " + lastUpdate + ")";
     }
 }
