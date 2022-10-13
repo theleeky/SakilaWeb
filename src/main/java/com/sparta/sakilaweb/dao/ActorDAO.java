@@ -58,20 +58,21 @@ public class ActorDAO {
             return new ActorDTO(-1, null, null, null);
     }
 
-    public ActorDTO update(ActorDTO actorDTO) {
-        Optional<Actor> optional = actorRepo.findById(actorDTO.getId());
+    public ActorDTO update(Actor actor) {
+        Optional<Actor> optional = actorRepo.findById(actor.getId());
         Actor theActor;
         if(optional.isPresent())
             theActor = optional.get();
         else
             return new ActorDTO(-1, null, null, null);
 
-        if(actorDTO.getFirstName()!=null)
-            theActor.setFirstName(actorDTO.getFirstName());
-        if(actorDTO.getLastName()!=null)
-            theActor.setLastName(actorDTO.getLastName());
+        if(actor.getFirstName()!=null)
+            theActor.setFirstName(actor.getFirstName());
+        if(actor.getLastName()!=null)
+            theActor.setLastName(actor.getLastName());
+        theActor.setLastUpdate(Instant.now());
         actorRepo.save(theActor);
-        theActor = actorRepo.findById(actorDTO.getId()).get();
+        theActor = actorRepo.findById(actor.getId()).get();
         return  new ActorDTO(theActor.getId(),
                 theActor.getFirstName(), theActor.getLastName(), theActor.getLastUpdate());
     }

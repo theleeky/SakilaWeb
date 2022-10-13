@@ -88,6 +88,20 @@ public class SakilaWebController {
         return "actorDeleted";
     }
 
+    @GetMapping("/sakila/actor/edit/{id}")
+    public String editActor(@PathVariable int id, Model model){
+        ActorDTO actor = actorDAO.getActorById(id);
+        model.addAttribute("actor", actor);
+        return "editActor";
+    }
+
+    @PostMapping("/sakila/actor/edit")
+    public String actorEdited(@ModelAttribute Actor actor, Model model){
+        ActorDTO editedActor = actorDAO.update(actor);
+        model.addAttribute("actor",actor);
+        return "actorEdited";
+    }
+
     @GetMapping("/sakila/cast/add/{id}")
     public String addCastMember(@PathVariable int id,
                                 Model model,
@@ -105,9 +119,18 @@ public class SakilaWebController {
         return new ArrayList<>();
     }
 
+
 //    @PostMapping("sakila/actor/form/{id}")
 //    public String updateActor(@ModelAttribute Actor actor, @PathVariable int id, Model model){
 //        Actor actorToUpdate = repo.findById(id).get();
 //    }
+//    @GetMapping("/login")
+//    public String login(){
+//        return "login";
+//    }
 
+//    @GetMapping("/accessDenied")
+//    public String accessDenied(){
+//        return "accessDenied";
+//    }
 }

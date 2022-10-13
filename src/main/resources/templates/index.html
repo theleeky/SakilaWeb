@@ -13,14 +13,23 @@
         <th>Last name</th>
     </tr>
     </thead>
-    <tr th:each="actor : ${allActors}">
+    <tr th:each="actor : ${allActors}"
+        th:if="${actor.id} < 201">
         <td th:text="${actor.id}"></td>
         <td th:text="${actor.firstName}"></td>
         <td th:text="${actor.lastName}"></td>
-        <td><a href="#"><button th:id="${actor.id}" type="button">Edit</button></a></td>
+        <td><a href="editActor.html" th:href="@{'sakila/actor/edit/' + ${actor.id}}"><button th:id="${actor.id}" type="button">Edit</button></a></td>
+
+    </tr>
+    <tr th:each="actor : ${allActors}"
+        th:if="${actor.id} > 200">
+        <td th:text="${actor.id}"></td>
+        <td th:text="${actor.firstName}"></td>
+        <td th:text="${actor.lastName}"></td>
+        <td><a href="editActor.html" th:href="@{'sakila/actor/edit/' + ${actor.id}}"><button th:id="${actor.id}" type="button">Edit</button></a></td>
         <td><a th:href="@{'sakila/actor/delete/'+ ${actor.id}}" href="actorToDelete.html"><button type="button">Delete</button></a></td>
     </tr>
-    <a href="actorForm.html" th:href="@{sakila/actor/form}"><button type="button">Create Actor</button></a>
 </table>
+<a href="actorForm.html" th:href="@{sakila/actor/form}"><button type="button">Create Actor</button></a>
 </body>
 </html>

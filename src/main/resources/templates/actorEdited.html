@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Edited Actor</title>
+</head>
+<body>
+<h2 th:text="'Actor id:' + ${actor.id} + ' has been updated:'"></h2>
+<div th:text="${actor.firstName}">This is the actor's first name</div>
+<div th:text="${actor.lastName}">This is the actor's last name</div>
+<a href="index.html" th:href="@{/sakila}"><button type="button">Home Page</button></a>
+</body>
+</html>
