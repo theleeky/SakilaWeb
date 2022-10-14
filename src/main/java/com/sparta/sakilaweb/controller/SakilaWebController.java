@@ -73,10 +73,8 @@ public class SakilaWebController {
     public String deleteActor(@PathVariable int id, Model model){
         ActorDTO actor = actorDAO.getActorById(id);
         model.addAttribute("actor", actor);
-        if (id > 200)
-            return "actorToDelete";
-        else
-            return "redirect:/sakila";
+        return "actorToDelete";
+
 
     }
 
@@ -117,6 +115,24 @@ public class SakilaWebController {
     public List<ActorDTO> castList(){
         System.out.println("Initializing the cast list...");
         return new ArrayList<>();
+    }
+
+//    @GetMapping("sakila/cast/delete/{id}")
+//    public String deleteActorFromCastList(@PathVariable int id, Model model){
+//        ActorDTO actor = actorDAO.getActorById(id);
+//        model.addAttribute("actor", actor);
+//        return "actorToDeleteCast";
+//
+//
+//    }
+
+    @PostMapping("sakila/cast/delete/{id}")
+    public String actorDeleted(@ModelAttribute Actor actor,
+                               Model model,
+                               @ModelAttribute("castList") List<ActorDTO> castList){
+        ActorDTO actorToDelete = actorDAO.getActorById(actor.getId());
+        castList.remove(actorToDelete);
+        return "displayCastList";
     }
 
 
