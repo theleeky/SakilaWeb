@@ -117,16 +117,16 @@ public class SakilaWebController {
         return new ArrayList<>();
     }
 
-//    @GetMapping("sakila/cast/delete/{id}")
-//    public String deleteActorFromCastList(@PathVariable int id, Model model){
-//        ActorDTO actor = actorDAO.getActorById(id);
-//        model.addAttribute("actor", actor);
-//        return "actorToDeleteCast";
-//
-//
-//    }
+    @GetMapping("sakila/cast/delete/{id}")
+    public String deleteActorFromCastList(@PathVariable int id, Model model){
+        ActorDTO actor = actorDAO.getActorById(id);
+        model.addAttribute("actor", actor);
+        return "actorToDeleteCast";
 
-    @PostMapping("sakila/cast/delete/{id}")
+
+    }
+
+    @PostMapping("sakila/cast/delete")
     public String actorDeleted(@ModelAttribute Actor actor,
                                Model model,
                                @ModelAttribute("castList") List<ActorDTO> castList){

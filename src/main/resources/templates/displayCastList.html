@@ -17,12 +17,7 @@
         <td th:text="${actor.id}"></td>
         <td th:text="${actor.firstName}"></td>
         <td th:text="${actor.lastName}"></td>
-        <td>
-        <form action="#" method="post" th:action="@{'sakila/cast/delete/' + ${actor.id}}" th:object="${actor}">
-            <input type="hidden" th:value="*{id}" name="id">
-            <button th:name="action" type="submit">Delete</button>
-        </form>
-        </td>
+        <td><a th:href="@{'/sakila/cast/delete/'+ ${actor.id}}" href="actorToDeleteCast.html"><button type="button">Delete</button></a></td>
     </tr>
 </table>
 <a href="index.html" th:href="@{/sakila}"><button type="button">Home Page</button></a>
